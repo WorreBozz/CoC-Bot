@@ -2,7 +2,7 @@ import pyautogui
 import time
 import datetime
 
-def Battle(antalStrider):
+def Battle(antalStrider, stopEvent):
     # CLICKS LIST
     clicks = [
         (103, 979), (1429, 708), (316, 992), (340, 700),
@@ -28,6 +28,9 @@ def Battle(antalStrider):
 
     # MAIN METHOD LOGIC
     for i in range(antalStrider):
+        if stopEvent.is_set():
+            print("Battle stopped by user.")
+            break
         # FIRST CLICK (ATTACK)
         moveNclick(0)
         # WAIT
@@ -60,6 +63,10 @@ def Battle(antalStrider):
         moveNclick(6)
         # WAIT SO DOESNT CLOG
         time.sleep(2)
+        if not stopEvent:
+            pass
+        else:
+            stop_event.set()
 
 def collectElixir():
     points = [(1317, 187), (1414, 934), (1608, 120)]
@@ -82,13 +89,16 @@ def collectElixir():
 
 
     
-def StartBot(AmountOfBattles):
+def StartBot(AmountOfBattles, stopEvent):
     time.sleep(5)
     print("Starting in 5 seconds.")
-    while True:
+    while not stopEvent.is_set():
         start = time.time()
 
-        Battle(AmountOfBattles)
+        Battle(AmountOfBattles, stopEvent)
+        if stopEvent.is_set():
+            print("Bot stopped by user.")
+            break
         collectElixir()
 
         end = time.time()
