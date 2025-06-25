@@ -82,18 +82,18 @@ def collectElixir():
 
 
     
+def StartBot(AmountOfBattles):
+    time.sleep(5)
+    print("Starting in 5 seconds.")
+    while True:
+        start = time.time()
 
-time.sleep(5)
-print("Starting in 5 seconds.")
-while True:
-    start = time.time()
+        Battle(AmountOfBattles)
+        collectElixir()
 
-    Battle(6)
-    collectElixir()
-
-    end = time.time()
-    elapsed = end - start
-    seconds = int(elapsed)
-    milliseconds = int((elapsed - seconds) * 1000)
-    print(f"Cycle done ({seconds}s {milliseconds}ms)")
+        end = time.time()
+        elapsed = end - start
+        seconds = int(elapsed)
+        milliseconds = int((elapsed - seconds) * 1000)
+        print(f"Cycle done ({seconds}s {milliseconds}ms)")
 
