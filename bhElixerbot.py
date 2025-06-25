@@ -63,10 +63,6 @@ def Battle(antalStrider, stopEvent):
         moveNclick(6)
         # WAIT SO DOESNT CLOG
         time.sleep(2)
-        if not stopEvent:
-            pass
-        else:
-            stop_event.set()
 
 def collectElixir():
     points = [(1317, 187), (1414, 934), (1608, 120)]
